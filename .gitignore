@@ -1,0 +1,6 @@
+# composer vendor dir
+/vendor
+
+# composer files
+composer.phar
+composer.lock
