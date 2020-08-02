@@ -96,8 +96,8 @@ function fetch(string $url): string
                                                 if (array_key_exists('preference_id', $_REQUEST)) $preference_id = $_REQUEST['preference_id'];
                                                 else $preference_id = '';
 
-                                                echo "<p>{$preference_id}</p><br/>" .
-                                                    "<p>{$id}</p></br>";
+                                                echo "<p>Preference_id: {$preference_id}</p><br/>" .
+                                                    "<p>Collection Payment id: {$id}</p></br>";
 
                                                 echo fetch('https://ircsasw-mp-ecommerce-php.herokuapp.com/webhook.txt');
 
