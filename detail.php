@@ -12,12 +12,40 @@ MercadoPago\SDK::setIntegratorId('dev_24c65fb163bf11ea96500242ac130004');
 // Crea un objeto de preferencia
 $preference = new MercadoPago\Preference();
 
+// define las caraceristicas de la preferencia
+$preference->payment_methods = array(
+    'excluded_payment_methods' => array(
+      array('id' => 'amex')
+    ),
+    'excluded_payment_types' => array(
+      array('id' => 'atm')
+    ),
+    'installments' => 6
+);
+
+// Crea el Payer
+$payer = new MercadoPago\Payer();
+$payer->name = 'Lalo';
+$payer->surname = 'Landa';
+$payer->email = 'test_user_58295862@testuser.com';
+$payer->phone->area_code = '52';
+$payer->phone->number = '5549737300';
+$payer->address->street_name = 'Insurgentes Sur';
+$payer->address->street_number = '1602';
+$payer->address->zip_code = '03940';
+
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
+$item->id = '1234';
+$item->description = 'Dispositivo móvil de Tienda e-commerce';
 $item->title = $_POST['title'];
+$item->picture_url = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/assets/' . basename($_POST['img']);
+$item->external_reference = 'arturo@ircsasoftware.com.mx';
 $item->quantity = $_POST['unit'];
 $item->unit_price = $_POST['price'];
+
 $preference->items = array($item);
+
 $preference->save();
 ?>
 
