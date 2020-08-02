@@ -2,6 +2,8 @@
 // SDK de Mercado Pago
 require __DIR__ .  '/vendor/autoload.php';
 
+$baseurl = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/';
+
 // Agrega credenciales
 //MercadoPago\SDK::setAccessToken('TEST-6497037793506343-080118-1b5cd080244f4116a1125ca2ae8403cd-570980227');
 MercadoPago\SDK::setAccessToken('APP_USR-1159009372558727-072921-8d0b9980c7494985a5abd19fbe921a3d-617633181');
@@ -12,19 +14,20 @@ MercadoPago\SDK::setIntegratorId('dev_24c65fb163bf11ea96500242ac130004');
 // Crea un objeto de preferencia
 $preference = new MercadoPago\Preference();
 
-$preference->back_urls = [
-    'success' => 'https://ircsasw-mp-ecommerce-php.herokuapp.com/success',
-    'failure' => 'https://ircsasw-mp-ecommerce-php.herokuapp.com/failure',
-    'pending' => 'https://ircsasw-mp-ecommerce-php.herokuapp.com/pending'
-];
-
-$preference->auto_return = 'approved';
-
 //NOTIFICATION URL
-$preference->notification_url = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/webhook';
+$preference->notification_url = $baseurl . 'webhook.php';
 
 //ADITIONAL INFO
 $preference->additional_info = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/';
+
+// rutas de retorno
+$preference->auto_return = 'approved';
+
+$preference->back_urls = array(
+    'success' => $baseurl . 'success.php',
+    'failure' => $baseurl . 'failure.php',
+    'pending' => $baseurl . 'pending.php'
+);
 
 // define las caraceristicas de la preferencia
 $preference->payment_methods = array(
@@ -53,7 +56,7 @@ $item = new MercadoPago\Item();
 $item->id = '1234';
 $item->description = 'Dispositivo móvil de Tienda e-commerce';
 $item->title = $_POST['title'];
-$item->picture_url = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/assets/' . basename($_POST['img']);
+$item->picture_url = $baseurl . 'assets/' . basename($_POST['img']);
 $item->external_reference = 'arturo@ircsasoftware.com.mx';
 $item->quantity = $_POST['unit'];
 $item->unit_price = $_POST['price'];
