@@ -51,6 +51,8 @@ $payer->address->street_name = 'Insurgentes Sur';
 $payer->address->street_number = '1602';
 $payer->address->zip_code = '03940';
 
+$preference->payer = $payer;
+
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
 $item->id = '1234';
