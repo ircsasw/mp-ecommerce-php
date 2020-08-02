@@ -40,6 +40,21 @@ $preference->payment_methods = array(
     'installments' => 6
 );
 
+// Crea el Payer
+$preference->payer = new MercadoPago\Payer();
+$payer->name = 'Lalo';
+$payer->surname = 'Landa';
+$payer->email = 'test_user_58295862@testuser.com';
+$payer->phone = array(
+    'area_code' => '52', 
+    'number' => '5549737300'
+);
+$payer->address = array(
+    'zip_code' => '03940', 
+    'street_name' => 'Insurgentes Sur', 
+    'street_number' => 1602
+);
+
 // Crea un ítem en la preferencia
 $item = new MercadoPago\Item();
 $item->id = '1234';
@@ -50,19 +65,11 @@ $item->external_reference = 'arturo@ircsasoftware.com.mx';
 $item->quantity = $_POST['unit'];
 $item->unit_price = $_POST['price'];
 
-// Crea el Payer
-$preference->payer = [
-    'name' => 'Lalo',
-    'surname' => 'Landa',
-    'email' => 'test_user_58295862@testuser.com',
-    'phone' => ['area_code' => '52', 'number' => '5549737300'],
-    'address' => ['zip_code' => '03940', 'street_name' => 'Insurgentes Sur', 'street_number' => 1602],
-];
-
 //EXTERNAL REFERENCE
 $preference->external_reference = 'arturo@ircsasoftware.com.mx';
 
 $preference->items = array($item);
+$preference->payer = $payer;
 
 $preference->save();
 ?>
