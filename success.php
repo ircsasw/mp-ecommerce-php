@@ -79,8 +79,8 @@ function fetch(string $url): string
                             <div class="row as-search-navbar" id="as-search-navbar" style="width: auto;">
                                 <div class="as-accessories-filter-tile column large-6 small-3">
 
-                                    <div class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" type="button">
-                                        <div class=" as-filter-button-text">
+                                    <div class="as-filter-button" aria-expanded="true" aria-controls="as-search-filters" style="cursor: auto;">
+                                        <div>
                                             <?php
                                             echo '<h2>REQUEST</h2>';
                                             echo "<pre>" . print_r($_REQUEST, true) . "</pre>";
