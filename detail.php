@@ -12,6 +12,20 @@ MercadoPago\SDK::setIntegratorId('dev_24c65fb163bf11ea96500242ac130004');
 // Crea un objeto de preferencia
 $preference = new MercadoPago\Preference();
 
+$preference->back_urls = [
+    'success' => 'https://ircsasw-mp-ecommerce-php.herokuapp.com/success',
+    'failure' => 'https://ircsasw-mp-ecommerce-php.herokuapp.com/failure',
+    'pending' => 'https://ircsasw-mp-ecommerce-php.herokuapp.com/pending'
+];
+
+$preference->auto_return = 'approved';
+
+//NOTIFICATION URL
+$preference->notification_url = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/webhook';
+
+//ADITIONAL INFO
+$preference->additional_info = 'https://ircsasw-mp-ecommerce-php.herokuapp.com/';
+
 // define las caraceristicas de la preferencia
 $preference->payment_methods = array(
     'excluded_payment_methods' => array(
@@ -180,12 +194,9 @@ $preference->save();
                                             <?php echo "$" . $_POST['unit'] ?>
                                         </h3>
                                     </div>
-                                    <form action="/procesar-pago" method="POST">
-                                        <script
-                                        src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
-                                        data-preference-id="<?php echo $preference->id; ?>" data-button-label="Pagar la compra">
-                                        </script>
-                                    </form>
+                                    <a class="btn btn-primary btn-block btn-lg my-3" target="_blank" href="<?= $preference->init_point ?>">
+                                        Pagar la Compra
+                                    </a>
                                 </div>
                             </div>
                         </div>
